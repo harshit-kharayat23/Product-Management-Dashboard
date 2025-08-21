@@ -7,12 +7,18 @@ console.log("ENV LOADED:", {
   user: process.env.DATABASE_USER,
   pass: process.env.DATABASE_PASS,
   host: process.env.DATABASE_HOST,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+
 });
 
-export async function dbConfig() {
+const pool=async()=> {
   return await mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
   });
 }
+
+export default pool;
